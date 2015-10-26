@@ -5,21 +5,10 @@
     android:layout_height="match_parent"
     android:orientation="horizontal" >
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/txt_choose_car"
-        android:id="@+id/txt_choose_car" />
-
-    <Spinner
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"></Spinner>
-
-
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/button_send"
-        android:onClick="sendMessage" />
+        android:text="@string/button_choose_car"
+        android:onClick="chooseCar" />
 
 </LinearLayout>

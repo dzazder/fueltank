@@ -131,4 +131,27 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         return fuelTypes;
     }
+
+    public List<Car> getAllCars() {
+        List<Car> cars = new ArrayList<Car>();
+
+        String selectQuery = "SELECT * FROM " + TABLE_CAR;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                Car car = new Car();
+                car.set_id(Integer.parseInt(cursor.getString(0)));
+                car.set_name(cursor.getString(1));
+                car.set_year(cursor.getInt(2));
+                car.set_defaultFuel(cursor.getInt(3));
+
+                cars.add(car);
+            } while (cursor.moveToNext());
+        }
+
+        return cars;
+    }
 }

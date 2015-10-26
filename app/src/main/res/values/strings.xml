@@ -7,4 +7,5 @@
     <string name="title_activity_display_message">DisplayMessageActivity</string>
     <string name="txt_choose_car">Wybierz samochód</string>
     <string name="title_activity_choose_car">ChooseCarActivity</string>
+    <string name="button_choose_car">Choose car</string>
 </resources>
