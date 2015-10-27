@@ -8,4 +8,9 @@
     <string name="txt_choose_car">Wybierz samochód</string>
     <string name="title_activity_choose_car">ChooseCarActivity</string>
     <string name="button_choose_car">Choose car</string>
+    <string name="lbl_car_name">Nazwa samochodu</string>
+    <string name="lbl_car_year">Rok produkcji</string>
+    <string name="lbl_default_fueltype">Wybierz domyślne paliwo</string>
+    <string name="btn_add_car">Dodaj samochód</string>
+    <string name="btn_cancel">Anuluj</string>
 </resources>

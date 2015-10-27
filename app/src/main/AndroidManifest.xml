@@ -29,6 +29,8 @@
             android:label="@string/title_activity_choose_car"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
+        <activity android:name=".AddCarActivity" >
+        </activity>
     </application>
 
 </manifest>

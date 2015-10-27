@@ -132,6 +132,56 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return fuelTypes;
     }
 
+    public List<KeyValuePair> getAllFuelTypesForSpinner() {
+        List<KeyValuePair> fuelTypes = new ArrayList<KeyValuePair>();
+
+        String selectQuery = "SELECT " + KEY_ID + "," + KEY_NAME + " FROM " + TABLE_FUEL_TYPE;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                KeyValuePair pair = new KeyValuePair(cursor.getInt(0), cursor.getString(1));
+
+                fuelTypes.add(pair);
+            } while (cursor.moveToNext());
+        }
+
+        return fuelTypes;
+    }
+
+    public List<KeyValuePair> getAllCarsForSpinner() {
+        List<KeyValuePair> cars = new ArrayList<KeyValuePair>();
+
+        String selectQuery = "SELECT " + KEY_ID + "," + KEY_NAME + " FROM " + TABLE_CAR;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                KeyValuePair pair = new KeyValuePair(cursor.getInt(0), cursor.getString(1));
+
+                cars.add(pair);
+            } while (cursor.moveToNext());
+        }
+
+        return cars;
+    }
+
+    public void addCar(Car car) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(KEY_NAME, car.get_name());
+        values.put(KEY_YEAR, car.get_year());
+        values.put(KEY_FK_DEFAULT_FUEL_TYPE, car.get_defaultFuel());
+
+        db.insert(TABLE_CAR, null, values);
+        db.close();
+    }
+
     public List<Car> getAllCars() {
         List<Car> cars = new ArrayList<Car>();
 
