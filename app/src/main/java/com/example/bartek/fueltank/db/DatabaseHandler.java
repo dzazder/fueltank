@@ -28,7 +28,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String KEY_ID = "id";
     private static final String KEY_NAME = "name";
     private static final String KEY_YEAR = "year";
-    private static final String KEY_FK_DEFAULT_FUEL_TYPE = "id_default_fuel_type";
     private static final String KEY_FK_FUEL_TYPE = "id_fuel_type";
     private static final String KEY_ICON = "icon";
     private static final String KEY_DATE_FUEL = "fuel_date";
@@ -36,6 +35,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String KEY_AMOUNT = "amount";
     private static final String KEY_PRICE_OVERALL = "price_overall";
     private static final String KEY_PRICE = "price";
+    private static final String KEY_IS_DEFAULT = "is_default";
 
     private ArrayList<FuelType> DICT_FUEL_TYPES = new ArrayList<>();
 
@@ -49,7 +49,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         String CREATE_FUEL_TYPE_TABLE = "CREATE TABLE " + TABLE_FUEL_TYPE + "("
                 + KEY_ID + " INTEGER PRIMARY KEY," + KEY_NAME + " TEXT,"
-                + KEY_ICON + " TEXT" + ")";
+                + KEY_ICON + " TEXT," + KEY_IS_DEFAULT + " INTEGER " + ")";
 
         String CREATE_CAR_TABLE = "CREATE TABLE " + TABLE_CAR + "("
                 + KEY_ID + " INTEGER PRIMARY KEY," + KEY_NAME + " TEXT,"
@@ -81,8 +81,15 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_FUEL);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_CAR);
-        db.execSQL("DROP TABLE ID EXISTS " + TABLE_FUEL_TYPE);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_FUEL_TYPE);
 
+        onCreate(db);
+    }
+    private static final String KEY_FK_DEFAULT_FUEL_TYPE = "id_default_fuel_type";
+
+    public void resetDatabase() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        onUpgrade(db, db.getVersion(), db.getVersion());
         onCreate(db);
     }
 
@@ -176,7 +183,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(KEY_NAME, car.get_name());
         values.put(KEY_YEAR, car.get_year());
-        values.put(KEY_FK_DEFAULT_FUEL_TYPE, car.get_defaultFuel());
+        values.put(KEY_FK_FUEL_TYPE, car.get_defaultFuel());
 
         db.insert(TABLE_CAR, null, values);
         db.close();

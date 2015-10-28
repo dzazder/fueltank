@@ -6,10 +6,12 @@ import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.bartek.fueltank.db.DatabaseHandler;
 import com.example.bartek.fueltank.db.FuelType;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -22,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         DatabaseHandler db = new DatabaseHandler(this);
+
         // Inserting
 
 /*
@@ -37,6 +40,20 @@ public class MainActivity extends AppCompatActivity {
         EditText editText = (EditText)findViewById(R.id.edit_message);
         editText.setText(allFuelTypes);
         */
+    }
+
+    public void resetDb(View view) {
+        try {
+            DatabaseHandler db = new DatabaseHandler(this);
+            db.resetDatabase();
+            Toast toastSuc = Toast.makeText(this, "Database reseted", Toast.LENGTH_SHORT);
+            toastSuc.show();
+        }
+        catch (Exception e) {
+            Log.e("Reset db", e.getMessage(), e);
+            Toast toastErr = Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT);
+            toastErr.show();
+        }
     }
 
     public void chooseCar(View view) {

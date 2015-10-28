@@ -11,4 +11,10 @@
         android:text="@string/button_choose_car"
         android:onClick="chooseCar" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Resetuj bazę danych"
+        android:onClick="resetDb"/>
+
 </LinearLayout>
