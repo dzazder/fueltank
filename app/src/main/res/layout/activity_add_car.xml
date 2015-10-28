@@ -39,10 +39,17 @@
         android:layout_height="wrap_content"
         android:id="@+id/spinner_choose_fueltype" />
 
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/checkbox_default"
+        android:text="@string/checkbox_default"/>
+
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
 
         <Button
             android:layout_width="wrap_content"

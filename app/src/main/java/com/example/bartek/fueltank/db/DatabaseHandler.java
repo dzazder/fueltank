@@ -49,11 +49,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         String CREATE_FUEL_TYPE_TABLE = "CREATE TABLE " + TABLE_FUEL_TYPE + "("
                 + KEY_ID + " INTEGER PRIMARY KEY," + KEY_NAME + " TEXT,"
-                + KEY_ICON + " TEXT," + KEY_IS_DEFAULT + " INTEGER " + ")";
+                + KEY_ICON + " TEXT" + ")";
 
         String CREATE_CAR_TABLE = "CREATE TABLE " + TABLE_CAR + "("
                 + KEY_ID + " INTEGER PRIMARY KEY," + KEY_NAME + " TEXT,"
-                + KEY_YEAR + " INT," + KEY_FK_FUEL_TYPE + " INT" + ")";
+                + KEY_YEAR + " INT," + KEY_FK_FUEL_TYPE + " INT,"
+                + KEY_IS_DEFAULT + " INTEGER " + ")";
 
         String CREATE_FUEL_TABLE = "CREATE TABLE " + TABLE_FUEL + "("
                 + KEY_ID + " INTEGER PRIMARY KEY," + KEY_FK_CAR + " INT,"
@@ -177,7 +178,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return cars;
     }
 
-    public void addCar(Car car) {
+    public long addCar(Car car) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -185,8 +186,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(KEY_YEAR, car.get_year());
         values.put(KEY_FK_FUEL_TYPE, car.get_defaultFuel());
 
-        db.insert(TABLE_CAR, null, values);
+        long result = db.insert(TABLE_CAR, null, values);
         db.close();
+
+        return result;
     }
 
     public List<Car> getAllCars() {
@@ -210,5 +213,25 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         }
 
         return cars;
+    }
+
+    public void setDefaultCar(long id) {
+        SQLiteDatabase db = getWritableDatabase();
+
+        ContentValues dataToUpdate = new ContentValues();
+        dataToUpdate.put(KEY_IS_DEFAULT, 0);
+
+        db.update(TABLE_CAR, dataToUpdate, null, null);
+
+        dataToUpdate.clear();
+        dataToUpdate.put(KEY_IS_DEFAULT, 1);
+
+        String where = KEY_ID + "=?";
+        String[] whereArgs = new String[] {
+                String.valueOf(id)
+        };
+
+        db.update(TABLE_CAR, dataToUpdate, where, whereArgs);
+        db.close();
     }
 }

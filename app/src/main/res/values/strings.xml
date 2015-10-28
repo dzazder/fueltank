@@ -13,4 +13,5 @@
     <string name="lbl_default_fueltype">Wybierz domyślne paliwo</string>
     <string name="btn_add_car">Dodaj samochód</string>
     <string name="btn_cancel">Anuluj</string>
+    <string name="checkbox_default">Domyślny samochód</string>
 </resources>

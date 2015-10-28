@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -36,6 +37,7 @@ public class AddCarActivity extends AppCompatActivity {
         EditText txtName = (EditText)findViewById(R.id.txt_car_name);
         EditText txtYear = (EditText)findViewById(R.id.txt_car_year);
         Spinner spnFuelType = (Spinner)findViewById(R.id.spinner_choose_fueltype);
+        CheckBox checkBoxDefault = (CheckBox)findViewById(R.id.checkbox_default);
 
         String carName = txtName.getText().toString();
         int carYear = Integer.parseInt(txtYear.getText().toString());
@@ -47,7 +49,10 @@ public class AddCarActivity extends AppCompatActivity {
         c.set_defaultFuel(fuelTypeId);
 
         DatabaseHandler db = new DatabaseHandler(this);
-        db.addCar(c);
+        long id = db.addCar(c);
+        if (checkBoxDefault.isChecked()) {
+            db.setDefaultCar(id);
+        }
         db.close();
 
         Toast toast = Toast.makeText(getApplicationContext(), "Dodano samochód", Toast.LENGTH_SHORT);
