@@ -7,7 +7,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -199,7 +198,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(KEY_FK_CAR, fuel.get_idCar());
         values.put(KEY_FK_FUEL_TYPE, fuel.get_id_FuelType());
-        values.put(KEY_DATE_FUEL, fuel.get_date().toString());
+        values.put(KEY_DATE_FUEL, fuel.get_date());
         values.put(KEY_AMOUNT, fuel.get_amount());
         values.put(KEY_PRICE, fuel.get_price());
         values.put(KEY_PRICE_OVERALL, fuel.get_priceOverall());

@@ -24,4 +24,5 @@
     <string name="lbl_price">Cena za litr</string>
     <string name="lbl_price_overall">Koszt</string>
     <string name="lbl_fuel_full">Tankowanie do pełna</string>
+    <string name="btn_change_date">Zmień datę</string>
 </resources>

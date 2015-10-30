@@ -1,13 +1,11 @@
 package com.example.bartek.fueltank.db;
 
-import java.util.Date;
-
 /**
  * Created by bartek on 30.10.15.
  */
 public class Fuel {
     int _id;
-    Date _date;
+    String _date;
     double _amount;
     double _price;
     double _priceOverall;
@@ -17,7 +15,7 @@ public class Fuel {
     int _idCar;
     int _id_FuelType;
 
-    public Fuel(int _id, Date _date, double _amount, double _price, double _priceOverall, int _mileage, boolean _fullFuel, int _idCar, int _id_FuelType) {
+    public Fuel(int _id, String _date, double _amount, double _price, double _priceOverall, int _mileage, boolean _fullFuel, int _idCar, int _id_FuelType) {
         this._id = _id;
         this._date = _date;
         this._amount = _amount;
@@ -29,7 +27,7 @@ public class Fuel {
         this._id_FuelType = _id_FuelType;
     }
 
-    public Fuel(Date _date, double _amount, double _price, double _priceOverall, int _mileage, boolean _fullFuel, int _idCar, int _id_FuelType) {
+    public Fuel(String _date, double _amount, double _price, double _priceOverall, int _mileage, boolean _fullFuel, int _idCar, int _id_FuelType) {
         this._date = _date;
         this._amount = _amount;
         this._price = _price;
@@ -48,11 +46,11 @@ public class Fuel {
         this._id = _id;
     }
 
-    public Date get_date() {
+    public String get_date() {
         return _date;
     }
 
-    public void set_date(Date _date) {
+    public void set_date(String _date) {
         this._date = _date;
     }
 
