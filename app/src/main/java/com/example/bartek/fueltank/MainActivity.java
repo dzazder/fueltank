@@ -56,6 +56,11 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void addFuel(View view) {
+        Intent intent = new Intent(this, AddFuelActivity.class);
+        startActivity(intent);
+    }
+
     public void chooseCar(View view) {
         Intent intent = new Intent(this, ChooseCarActivity.class);
         startActivity(intent);

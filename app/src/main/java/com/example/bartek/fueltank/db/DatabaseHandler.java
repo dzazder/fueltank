@@ -36,6 +36,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String KEY_PRICE_OVERALL = "price_overall";
     private static final String KEY_PRICE = "price";
     private static final String KEY_IS_DEFAULT = "is_default";
+    private static final String KEY_IS_FULL = "is_full";
+    private static final String KEY_MILEAGE = "mileage";
 
     private ArrayList<FuelType> DICT_FUEL_TYPES = new ArrayList<>();
 
@@ -60,7 +62,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 + KEY_ID + " INTEGER PRIMARY KEY," + KEY_FK_CAR + " INT,"
                 + KEY_FK_FUEL_TYPE + " INT," + KEY_DATE_FUEL + " TEXT,"
                 + KEY_AMOUNT + " REAL," + KEY_PRICE + " REAL,"
-                + KEY_PRICE_OVERALL + "REAL" + ")";
+                + KEY_PRICE_OVERALL + " REAL," + KEY_MILEAGE + " INT, " + KEY_IS_FULL + ")";
 
         db.execSQL(CREATE_FUEL_TYPE_TABLE);
         db.execSQL(CREATE_CAR_TABLE);
@@ -86,7 +88,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         onCreate(db);
     }
-    private static final String KEY_FK_DEFAULT_FUEL_TYPE = "id_default_fuel_type";
 
     public void resetDatabase() {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -187,6 +188,25 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(KEY_FK_FUEL_TYPE, car.get_defaultFuel());
 
         long result = db.insert(TABLE_CAR, null, values);
+        db.close();
+
+        return result;
+    }
+
+    public long addFuel(Fuel fuel) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(KEY_FK_CAR, fuel.get_idCar());
+        values.put(KEY_FK_FUEL_TYPE, fuel.get_id_FuelType());
+        values.put(KEY_DATE_FUEL, fuel.get_date().toString());
+        values.put(KEY_AMOUNT, fuel.get_amount());
+        values.put(KEY_PRICE, fuel.get_price());
+        values.put(KEY_PRICE_OVERALL, fuel.get_priceOverall());
+        values.put(KEY_MILEAGE, fuel.get_mileage());
+        values.put(KEY_IS_FULL, fuel.is_fullFuel());
+
+        long result = db.insert(TABLE_FUEL, null, values);
         db.close();
 
         return result;

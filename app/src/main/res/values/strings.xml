@@ -14,4 +14,14 @@
     <string name="btn_add_car">Dodaj samochód</string>
     <string name="btn_cancel">Anuluj</string>
     <string name="checkbox_default">Domyślny samochód</string>
+    <string name="title_activity_add_fuel">AddFuelActivity</string>
+    <string name="btn_add_fuel">Dodaj tankowanie</string>
+    <string name="lbl_car">Samochód</string>
+    <string name="lbl_fuel_type">Rodzaj paliwa</string>
+    <string name="lbl_mileage">Przebieg</string>
+    <string name="lbl_date">Data</string>
+    <string name="lbl_amount">Zatankowano</string>
+    <string name="lbl_price">Cena za litr</string>
+    <string name="lbl_price_overall">Koszt</string>
+    <string name="lbl_fuel_full">Tankowanie do pełna</string>
 </resources>
