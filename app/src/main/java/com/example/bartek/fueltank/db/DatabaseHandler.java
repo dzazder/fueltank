@@ -211,6 +211,47 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return result;
     }
 
+    public ArrayList<Fuel> getAllFuels() {
+        ArrayList<Fuel> fuels = new ArrayList<Fuel>();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String selectQuery = "SELECT " + KEY_ID + ","
+                + KEY_FK_CAR + ","
+                + KEY_FK_FUEL_TYPE + ","
+                + KEY_DATE_FUEL + ","
+                + KEY_AMOUNT + ","
+                + KEY_PRICE + ","
+                + KEY_PRICE_OVERALL + ","
+                + KEY_MILEAGE + ","
+                + KEY_IS_FULL +
+                " FROM " + TABLE_FUEL;
+
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                Fuel fuel = new Fuel();
+                fuel.set_id(cursor.getInt(0));
+                fuel.set_idCar(cursor.getInt(1));
+                fuel.set_id_FuelType(cursor.getInt(2));
+                fuel.set_date(cursor.getString(3));
+                fuel.set_amount(cursor.getDouble(4));
+                fuel.set_price(cursor.getDouble(5));
+                fuel.set_priceOverall(cursor.getDouble(6));
+                fuel.set_mileage(cursor.getInt(7));
+                fuel.set_fullFuel(Boolean.parseBoolean(cursor.getString(8)));
+
+                fuels.add(fuel);
+            } while (cursor.moveToNext());
+        }
+
+
+        db.close();
+
+        return fuels;
+    }
+
     public List<Car> getAllCars() {
         List<Car> cars = new ArrayList<Car>();
 

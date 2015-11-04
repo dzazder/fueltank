@@ -36,6 +36,11 @@
             android:label="@string/title_activity_add_fuel"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
+        <activity
+            android:name=".AllFuelsActivity"
+            android:label="@string/title_activity_all_fuels"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
     </application>
 
 </manifest>

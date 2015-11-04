@@ -66,6 +66,11 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void getAllFuels(View view) {
+        Intent intent = new Intent(this, AllFuelsActivity.class);
+        startActivity(intent);
+    }
+
     //public void sendMessage(View view) {
     //    Intent intent = new Intent(this, DisplayMessageActivity.class);
         //EditText editText = (EditText)findViewById(R.id.);

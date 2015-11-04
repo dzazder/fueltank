@@ -15,6 +15,10 @@ public class Fuel {
     int _idCar;
     int _id_FuelType;
 
+    public Fuel() {
+
+    }
+
     public Fuel(int _id, String _date, double _amount, double _price, double _priceOverall, int _mileage, boolean _fullFuel, int _idCar, int _id_FuelType) {
         this._id = _id;
         this._date = _date;

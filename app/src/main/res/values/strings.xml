@@ -25,4 +25,5 @@
     <string name="lbl_price_overall">Koszt</string>
     <string name="lbl_fuel_full">Tankowanie do pełna</string>
     <string name="btn_change_date">Zmień datę</string>
+    <string name="title_activity_all_fuels">AllFuelsActivity</string>
 </resources>
