@@ -75,7 +75,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         DICT_FUEL_TYPES.add(new FuelType(5, "DIESEL", ""));
 
         for (FuelType ft: DICT_FUEL_TYPES) {
-            addFuelType(ft);
+            addFuelType(db, ft);
         }
     }
 
@@ -91,18 +91,14 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public void resetDatabase() {
         SQLiteDatabase db = this.getWritableDatabase();
         onUpgrade(db, db.getVersion(), db.getVersion());
-        onCreate(db);
     }
 
-    public void addFuelType(FuelType fuelType) {
-        SQLiteDatabase db = this.getWritableDatabase();
-
+    public void addFuelType(SQLiteDatabase db, FuelType fuelType) {
         ContentValues values = new ContentValues();
         values.put(KEY_NAME, fuelType.get_name());
         values.put(KEY_ICON, fuelType.get_icon());
 
         db.insert(TABLE_FUEL_TYPE, null, values);
-        db.close();
     }
 
     public FuelType getFuelType(int id) {
@@ -114,6 +110,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         FuelType fuelType = new FuelType(Integer.parseInt(cursor.getString(0)),
                 cursor.getString(1), cursor.getString(2));
+
+        //db.close();
 
         return fuelType;
     }
@@ -137,13 +135,17 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             } while (cursor.moveToNext());
         }
 
+        //db.close();
+
         return fuelTypes;
     }
 
     public List<KeyValuePair> getAllFuelTypesForSpinner() {
         List<KeyValuePair> fuelTypes = new ArrayList<KeyValuePair>();
 
-        String selectQuery = "SELECT " + KEY_ID + "," + KEY_NAME + " FROM " + TABLE_FUEL_TYPE;
+        String selectQuery = "SELECT ft." + KEY_ID + ",ft." + KEY_NAME + " FROM " + TABLE_FUEL_TYPE
+                + " ft LEFT JOIN " + TABLE_CAR + " c ON c." + KEY_FK_FUEL_TYPE + " = ft." + KEY_ID
+                + " order by c." + KEY_IS_DEFAULT + " desc ";
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -156,13 +158,16 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             } while (cursor.moveToNext());
         }
 
+        //db.close();
+
         return fuelTypes;
     }
 
     public List<KeyValuePair> getAllCarsForSpinner() {
         List<KeyValuePair> cars = new ArrayList<KeyValuePair>();
 
-        String selectQuery = "SELECT " + KEY_ID + "," + KEY_NAME + " FROM " + TABLE_CAR;
+        String selectQuery = "SELECT " + KEY_ID + "," + KEY_NAME + " FROM " + TABLE_CAR
+                + " ORDER BY " + KEY_IS_DEFAULT + " DESC ";
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -175,6 +180,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             } while (cursor.moveToNext());
         }
 
+        //db.close();
         return cars;
     }
 
@@ -246,8 +252,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             } while (cursor.moveToNext());
         }
 
+        cursor.close();
 
-        db.close();
+        //db.close();
 
         return fuels;
     }
@@ -271,6 +278,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 cars.add(car);
             } while (cursor.moveToNext());
         }
+
+        //db.close();
 
         return cars;
     }
