@@ -3,9 +3,12 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">#D64238</item>
+        <item name="colorPrimaryDark">#CB161F</item>
+        <item name="colorAccent">#D4443B</item>
+        <item name="android:background">#343434</item>
+        <item name="android:editTextStyle">@style/App_EditTextStyle</item>
+        <item name="android:textViewStyle">@style/App_TextViewStyle</item>
     </style>
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
@@ -13,5 +16,13 @@
     </style>
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="App_EditTextStyle">
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
+
+    <style name="App_TextViewStyle">
+        <item name="android:textColor">#BBBBBB</item>
+    </style>
 
 </resources>
